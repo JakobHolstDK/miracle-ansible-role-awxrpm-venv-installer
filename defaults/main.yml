@@ -4,6 +4,16 @@ project: awx
 virtualenvroot: /var/virtualenvironments 
 venv: "{{ virtualenvroot }}/{{ project }}/{{ awx_image_version }}/venv"
 awx_user: awx
+CLUSTER_HOST_ID: awx
+nginx_disable_https: true
+nginx_disable_hsts: true
+nginx_http_port: 80
+awx_operator: awx 
+postgreshost: 127.0.0.1 
+postgres_port: 5432 
+nodejsversion: v14.19.3
 awx_db_password: password
-
+awxpassword: run44fun 
+secret_key: "k00qzfzv%)5u$@9cu**&vh2io&5-c^8-_2de-qnte$x4b3-_"
+awx_install_redis_init_name: awxredis
 
