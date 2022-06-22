@@ -265,7 +265,9 @@
 - name: Migrate if needed
   environment: 
     GIT_PYTHON_REFRESH: quiet
-  command: 
+  command: "{{ venv }}/bin/awx-manage migrate"
+  args:
+    chdir: 
   register: mirgrate_cmd
 
 - name: Create systemd service cbreceiver

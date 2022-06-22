@@ -1,6 +1,7 @@
 ---
 awx_image_version: 19.5.1
 project: awx
+destination: "/tmp/{{ project }}/{{ awx_image_version }}"
 virtualenvroot: /var/virtualenvironments 
 venv: "{{ virtualenvroot }}/{{ project }}/{{ awx_image_version }}/venv"
 awx_user: awx
