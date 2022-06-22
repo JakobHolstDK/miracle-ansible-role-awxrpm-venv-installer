@@ -1,2 +1,3 @@
 ---
 venv: /var/awx/venv
+awx_user: awx
