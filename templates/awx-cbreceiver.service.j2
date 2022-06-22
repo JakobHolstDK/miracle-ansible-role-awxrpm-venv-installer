@@ -5,15 +5,15 @@ PartOf=awx.service
 After=awx.service
 
 [Service]
-User=awx
-Group=awx
+User="{{ awx_user }}"
+Group="{{ awx_user }}"
 EnvironmentFile=-/etc/sysconfig/awx
 Environment=AWX_SETTINGS_FILE=/etc/tower/settings.py
 Environment=PATH=/bin:/sbin:/usr/bin:/usr/sbin:/var/awx/venv/bin
 PermissionsStartOnly=true
 ExecStartpre=if [ ! -d /var/run/tower ]; then mkdir /var/run/tower; fi
-ExecStartpre=chown awx:awx /var/run/tower
-ExecStart=/var/awx/venv/bin/awx-manage run_callback_receiver
+ExecStartpre="chown {{ awx_user }}:{{ awx_user }} /var/run/tower"
+ExecStart="{{ venv }}/bin/awx-manage run_callback_receiver"
 Restart=on-failure
 RestartSec=2s
 
