@@ -1,6 +1,6 @@
 - name: Install django-debug-toolbar 
   ansible.builtin.command: /var/awx/venv/bin/pip install django-debug-toolbar
-  become: yes
+  become: true
   args:
     chdir:  /tmp/awx
 
@@ -249,13 +249,18 @@
 #  become_user: awx
 #  become: True
 
-- name: Run awxprepare
-  shell: /usr/local/bin/awxprepare.sh
-  become_user: awx
-  become: True
-  register: awxprepare_cmd
-  failed_when: awxprepare_cmd.rc == 1
-  changed_when: awxprepare_cmd.rc == 0
+#- name: Run awxprepare
+#  shell: /usr/local/bin/awxprepare.sh
+#  become_user: awx
+#  become: True
+#  register: awxprepare_cmd
+#  failed_when: awxprepare_cmd.rc == 1
+#  changed_when: awxprepare_cmd.rc == 0
+- name: Migrate if needed
+  environment: 
+    GIT_PYTHON_REFRESH: quiet
+  command: 
+  register: mirgrate_cmd
 
 
 - name: Create systemd service cbreceiver
