@@ -268,7 +268,7 @@
   command: "{{ venv }}/bin/awx-manage migrate"
   args:
     chdir: "{{ destination }}"
-  register: mirgrate_cmd
+  register: migrate_cmd
   failed_when: migrate_cmd.rc == 1
   changed_when: migrate_cmd.rc == 0
 
