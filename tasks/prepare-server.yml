@@ -116,7 +116,16 @@
 
 - name: Recursirely change ownership of the directory /tmp/awx
   ansible.builtin.file:
-    path: /tmp/awx
+    path: "{{ virtualenvroot }}"
+    state: directory
+    recurse: yes
+    owner: "{{ awx_user }}"
+    group: "{{ awx_user }}"
+  become: True
+
+- name: Recursirely change ownership of the directory /tmp/awx
+  ansible.builtin.file:
+    path: "/tmp/{{ project }}"
     state: directory
     recurse: yes
     owner: "{{ awx_user }}"
@@ -125,7 +134,7 @@
 
 - name:  create venv
   ansible.builtin.pip:
-    requirements: /tmp/awx/requirements/requirements.txt
+    requirements: "tmp/{{ project }}/requirements/requirements.txt"
     virtualenv: "{{ venv }}"
     virtualenv_command: /usr/bin/python3 -m venv
   become_user: "{{ awx_user }}"

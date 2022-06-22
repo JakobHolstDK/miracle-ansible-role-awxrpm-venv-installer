@@ -1,4 +1,8 @@
 ---
-venv: /var/awx/venv
-awx_user: awx
 awx_image_version: 19.5.1
+project: awx
+virtualenvroot: /var/virtualenvironments 
+venv: "{{ virtualenvroot }}{{ project }}/{{ awx_image_version }}/venv"
+awx_user: awx
+
+
