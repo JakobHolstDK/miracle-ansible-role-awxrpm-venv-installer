@@ -17,4 +17,6 @@ awx_db_password: password
 awxpassword: run44fun 
 secret_key: "k00qzfzv%)5u$@9cu**&vh2io&5-c^8-_2de-qnte$x4b3-_"
 awx_install_redis_init_name: awxredis
-
+awx_admin_user: admin
+awx_admin_password: '!ljFfWmoodMTVm8bI6WfXz1GW1gVgg3sjTwtilB9'
+awx_admin_email: john@doe.com

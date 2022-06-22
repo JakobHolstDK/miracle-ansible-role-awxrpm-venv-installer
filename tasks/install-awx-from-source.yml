@@ -280,6 +280,42 @@
   become_user: "{{ awx_user }}"
   become: True
 
+- name: "collect statics"
+  environment: 
+    GIT_PYTHON_REFRESH: quiet
+  command: "{{ venv }}/bin/awx-manage collectstatic --noinput --clear -v0"
+  args:
+    chdir: "{{ destination }}"
+  register: migrate_cmd
+  failed_when: migrate_cmd.rc == 1
+  changed_when: migrate_cmd.rc == 0
+  become_user: "{{ awx_user }}"
+  become: True
+
+- name: "collect statics"
+  environment: 
+    GIT_PYTHON_REFRESH: quiet
+  command:
+    argv: 
+     - psql
+     - '-dawx'
+     - '-Uawx'
+     - '-c'
+     - UPDATE auth_user SET password='{{ awx_admin_password }}' where username = '{{ awx_admin_user }}'
+  args:
+    chdir: "{{ destination }}"
+  register: migrate_cmd
+  failed_when: migrate_cmd.rc == 1
+  changed_when: migrate_cmd.rc == 0
+  become_user: "{{ awx_user }}"
+  become: True
+
+
+
+
+
+
+
 
 - name: Create systemd service cbreceiver
   template:
