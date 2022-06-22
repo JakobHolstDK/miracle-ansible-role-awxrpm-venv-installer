@@ -253,6 +253,10 @@
   shell: /usr/local/bin/awxprepare.sh
   become_user: awx
   become: True
+  register: awxprepare_cmd
+  failed_when: awxprepare_cmd.rc == 1
+  changed_when: awxprepare_cmd.rc == 0
+
 
 - name: Create systemd service cbreceiver
   template:

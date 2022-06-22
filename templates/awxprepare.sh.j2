@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-GIT_PYTHON_REFRESH=quiet /var/awx/venv/bin/awx-manage migrate
+GIT_PYTHON_REFRESH=quiet /tmp/awxrpmvenv/awx-manage migrate
 GIT_PYTHON_REFRESH=quiet /var/awx/venv/bin/awx-manage collectstatic --noinput --clear -v0
 echo "from django.contrib.auth.models import User; User.objects.create_superuser('admin', 'root@localhost', 'password')" | GIT_PYTHON_REFRESH=quiet /var/awx/venv/bin/awx-manage shell 
 GIT_PYTHON_REFRESH=quiet /var/awx/venv/bin/awx-manage provision_instance --hostname=$(hostname)
