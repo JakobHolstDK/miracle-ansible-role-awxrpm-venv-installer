@@ -1,15 +1,15 @@
-- name: Prepare server
+- name: "main | Prepare server"
   import_tasks: prepare-server.yml 
 
-- name: install postgress
+- name: "main | install postgress"
   import_tasks: install-postgres.yml 
 
-- name: install redis
+- name: "main | install redis"
   import_tasks: install-redis.yml 
 
-- name: install nginx
+- name: "main | install nginx"
   import_tasks: nginx.yml
 
-- name: setup awx services
+- name: "main | setup awx services"
   import_tasks: install-awx-from-source.yml
 
