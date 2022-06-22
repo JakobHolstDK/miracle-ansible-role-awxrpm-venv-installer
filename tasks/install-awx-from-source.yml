@@ -268,7 +268,6 @@
   command: 
   register: mirgrate_cmd
 
-
 - name: Create systemd service cbreceiver
   template:
     src:  awx-cbreceiver.service.j2
@@ -278,7 +277,6 @@
     owner: root
     group: root
   become: True
-
 
 - name: Create systemd service  awx-daphne.service
   template:
@@ -356,7 +354,6 @@
     - awx-dispatcher
     - awx-web
     - awx-wsbroadcast
-
 
 - name: Run pip freeze
   shell: "{{ venv }}/bin/pip freeze >/tmp/awxrpm.requirements.txt"
