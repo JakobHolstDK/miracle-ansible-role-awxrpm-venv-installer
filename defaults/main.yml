@@ -4,5 +4,6 @@ project: awx
 virtualenvroot: /var/virtualenvironments 
 venv: "{{ virtualenvroot }}/{{ project }}/{{ awx_image_version }}/venv"
 awx_user: awx
+awx_db_password: password
 
 
