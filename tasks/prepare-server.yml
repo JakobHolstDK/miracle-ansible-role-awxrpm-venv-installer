@@ -29,7 +29,7 @@
                 'supervisor'
                 
         ]
-  become: yes
+  become: true
   when: ansible_facts['os_family'] == 'RedHat'
 
 - name: Install add  packages
@@ -67,7 +67,7 @@
     group: "{{ awx_user }}"
     state: directory
     mode: "u=rwx,g=rwx,o=r"
-  become: yes
+  become: true
 
 - name: Create  /var/lib/awx/rsyslog
   file:
@@ -76,7 +76,7 @@
     group: "{{ awx_user }}"
     state: directory
     mode: "u=rwx,g=rwx,o=r"
-  become: yes
+  become: true
 
 - name: Create awx home
   file:
@@ -85,7 +85,7 @@
     group: "{{ awx_user }}"
     state: directory
     mode: "u=rwx,g=rwx,o=r"
-  become: yes
+  become: true
 
 - name: Git checkout awx
   ansible.builtin.git:

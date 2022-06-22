@@ -359,7 +359,7 @@
 
 
 - name: Run pip freeze
-  shell: {{ venv }}/bin/pip freeze >/tmp/awxrpm.requirements.txt
+  shell: "{{ venv }}/bin/pip freeze >/tmp/awxrpm.requirements.txt"
   become_user: awx
   become: True
 
