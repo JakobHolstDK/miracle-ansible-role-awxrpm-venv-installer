@@ -267,8 +267,11 @@
     GIT_PYTHON_REFRESH: quiet
   command: "{{ venv }}/bin/awx-manage migrate"
   args:
-    chdir: 
+    chdir: "{{ destination }}"
   register: mirgrate_cmd
+  failed_when: migrate_cmd.rc == 1
+  changed_when: migrate_cmd.rc == 0
+
 
 - name: Create systemd service cbreceiver
   template:
