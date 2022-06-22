@@ -10,6 +10,12 @@
   args:
     chdir:  "/tmp/{{ awx_user }}/{{ awx_image_version }}"
 
+- name: Install ansible runner
+  ansible.builtin.command: "{{ venv }}/bin/pip install ansible_runner"
+  become: true
+  args:
+    chdir:  "/tmp/{{ awx_user }}/{{ awx_image_version }}"
+
 - name: Git checkout nodejs
   ansible.builtin.git:
     repo: 'https://github.com/nodejs/node.git'
