@@ -134,7 +134,7 @@
 
 - name:  create venv
   ansible.builtin.pip:
-    requirements: "tmp/{{ project }}/requirements/requirements.txt"
+    requirements: "/tmp/{{ project }}/requirements/requirements.txt"
     virtualenv: "{{ venv }}"
     virtualenv_command: /usr/bin/python3 -m venv
   become_user: "{{ awx_user }}"
