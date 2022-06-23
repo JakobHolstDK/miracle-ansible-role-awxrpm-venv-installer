@@ -292,9 +292,10 @@
   become_user: "{{ awx_user }}"
   become: True
 
-- name: "collect statics"
+- name: "Force password on superuser"
   environment: 
     GIT_PYTHON_REFRESH: quiet
+    
   command:
     argv: 
      - psql
@@ -307,7 +308,7 @@
   register: migrate_cmd
   failed_when: migrate_cmd.rc == 1
   changed_when: migrate_cmd.rc == 0
-  become_user: "{{ awx_user }}"
+  become_user: "pgsql"
   become: True
 
 
