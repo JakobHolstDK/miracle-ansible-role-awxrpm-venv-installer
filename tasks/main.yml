@@ -10,6 +10,8 @@
 - name: "main | install nginx"
   import_tasks: nginx.yml
 
-- name: "main | setup awx services"
-  import_tasks: install-awx-from-source.yml
+#- name: "main | setup awx services"
+#  import_tasks: install-awx-from-source.yml
 
+- name: "main | setup awx services"
+  import_tasks: install-awx-debug.yml
