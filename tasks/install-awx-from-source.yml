@@ -311,8 +311,29 @@
   become_user: "{{ awx_user }}"
   become: True
 
+- name: "Provision instance"
+  environment: 
+    GIT_PYTHON_REFRESH: quiet
+  command: "{{ venv }}/bin/awx-manage  provision_instance --hostname=$(hostname)"
+  args:
+    chdir: "{{ destination }}"
+  register: migrate_cmd
+  failed_when: migrate_cmd.rc == 1
+  changed_when: migrate_cmd.rc == 0
+  become_user: "{{ awx_user }}"
+  become: True
 
-
+- name: "Register quename"
+  environment: 
+    GIT_PYTHON_REFRESH: quiet
+  command: "{{ venv }}/bin/awx-manage  register_queue --queuename=tower --hostnames=$(hostname)
+  args:
+    chdir: "{{ destination }}"
+  register: migrate_cmd
+  failed_when: migrate_cmd.rc == 1
+  changed_when: migrate_cmd.rc == 0
+  become_user: "{{ awx_user }}"
+  become: True
 
 
 
