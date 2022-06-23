@@ -314,7 +314,7 @@
 - name: "Provision instance"
   environment: 
     GIT_PYTHON_REFRESH: quiet
-  command: "{{ venv }}/bin/awx-manage  provision_instance --hostname=$(hostname)"
+  command: "{{ venv }}/bin/awx-manage  provision_instance --hostname={{ ansible_hostname }}"
   args:
     chdir: "{{ destination }}"
   register: migrate_cmd
@@ -326,7 +326,7 @@
 - name: "Register quename"
   environment: 
     GIT_PYTHON_REFRESH: quiet
-  command: "{{ venv }}/bin/awx-manage  register_queue --queuename=tower --hostnames=$(hostname)"
+  command: "{{ venv }}/bin/awx-manage  register_queue --queuename=tower --hostname={{ ansible_hostname }}"
   args:
     chdir: "{{ destination }}"
   register: migrate_cmd
