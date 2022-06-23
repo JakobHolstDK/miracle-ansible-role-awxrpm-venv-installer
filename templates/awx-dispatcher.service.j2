@@ -11,8 +11,6 @@ EnvironmentFile=-/etc/sysconfig/awx
 Environment=AWX_SETTINGS_FILE=/etc/tower/settings.py
 Environment=PATH="/bin:/sbin:/usr/bin:/usr/sbin:{{ venv }}/bin"
 PermissionsStartOnly=true
-ExecStartpre=if [ ! -d /var/run/tower ]; then mkdir /var/run/tower; fi
-ExecStartpre="chown {{ awx_user }}:{{ awx_user}} /var/run/tower"
 ExecStart="{{ venv }}/bin/awx-manage run_dispatcher"
 Restart=on-failure
 RestartSec=2s
