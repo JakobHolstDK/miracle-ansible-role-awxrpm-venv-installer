@@ -1,5 +1,7 @@
 - name: "prepare-server | Enable EPEL Repository on CentOS 8"
-  command: " yum install -y https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm"
+  environment: 
+    ARCH: "{{ ansible_architecture }}"
+  command: "subscription-manager repos --enable 'codeready-builder-for-rhel-8-${ARCH}-rpms'"
   become: True
   when: ansible_facts['os_family'] == 'RedHat'
 
