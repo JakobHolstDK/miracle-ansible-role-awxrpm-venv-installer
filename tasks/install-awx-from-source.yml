@@ -268,6 +268,15 @@
 #  register: awxprepare_cmd
 #  failed_when: awxprepare_cmd.rc == 1
 #  changed_when: awxprepare_cmd.rc == 0
+- name: Force superuser on awx
+  command: "{{ venv }}/bin/awx-manage  createsuperuser  --username {{ awx_admin_user }} --email {{ awx_admin_email }} --noinput"
+  register: createsuperuser_cmd
+  failed_when: createsuperuser_cmd.rc == 1
+  changed_when: createsuperuser_cmd.rc == 0
+  become_user: "{{ awx_user }}"
+  become: True
+
+
 - name: Migrate if needed
   environment: 
     GIT_PYTHON_REFRESH: quiet
