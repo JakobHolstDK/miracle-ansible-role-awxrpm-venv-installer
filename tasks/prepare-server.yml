@@ -25,7 +25,8 @@
                 '@Development Tools',
                 'python3.8',
                 'ansible-collection-ansible-posix',
-                'supervisor'
+                'supervisor',
+                'postgresql-server'
         ]
   become: true
   when: ansible_facts['os_family'] == 'RedHat'

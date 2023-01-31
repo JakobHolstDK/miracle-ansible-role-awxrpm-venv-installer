@@ -1,19 +1,4 @@
-- name: Add pg12 repo
-  ansible.builtin.shell:
-    cmd: yum -y install https://download.postgresql.org/pub/repos/yum/reporpms/EL-8-x86_64/pgdg-redhat-repo-latest.noarch.rpm
-  become: True
-
-- name:  disable pg
-  ansible.builtin.shell:
-    cmd:  dnf -qy module disable postgresql
-  become: True
-
-- name:  install pg 12
-  ansible.builtin.shell:
-    cmd:  dnf -y install postgresql12 postgresql12-server
-  become: True
-
-- name: Stop service postgres, if not stopped
+- name: "setup-postgress | Stop service postgres, if not stopped"
   ansible.builtin.service:
     name: postgresql-12 
     state: stopped
