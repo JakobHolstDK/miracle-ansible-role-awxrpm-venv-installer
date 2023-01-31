@@ -57,7 +57,7 @@
     group: "{{ awx_user }}"
   become: true 
 
-- name: Create log dir
+- name: "prepare-server  | Create log dir"
   file:
     path: /var/log/tower
     owner: "{{ awx_user }}"
@@ -66,7 +66,7 @@
     mode: "u=rwx,g=rwx,o=r"
   become: true
 
-- name: Create  /var/lib/awx/rsyslog
+- name: "prepare-server | Create  /var/lib/awx/rsyslog"
   file:
     path: /var/lib/awx/rsyslog
     owner: "{{ awx_user }}"
@@ -75,7 +75,7 @@
     mode: "u=rwx,g=rwx,o=r"
   become: true
 
-- name: Create awx home
+- name: "prepare-server | Create awx home"
   file:
     path: /var/lib/awx
     owner: "{{ awx_user }}"
@@ -84,7 +84,7 @@
     mode: "u=rwx,g=rwx,o=r"
   become: true
 
-- name: Git checkout awx
+- name: "prepare-server | Git checkout awx"
   ansible.builtin.git:
     repo: 'https://github.com/ansible/awx.git'
     dest: "/tmp/awx/{{ awx_image_version }}"
@@ -93,7 +93,7 @@
   become: True
   become_user: "{{ awx_user }}"
 
-- name: Recursively change ownership of the directory /etc/tower/conf.d
+- name: "prepare-server | Recursively change ownership of the directory /etc/tower/conf.d"
   ansible.builtin.file:
     path: /etc/tower/conf.d
     state: directory
@@ -103,7 +103,7 @@
   become: True
 
 
-- name: set owener /run/tower
+- name: "prepare-server | set owener /run/tower"
   ansible.builtin.file:
     path: /run/tower
     state: directory
@@ -111,7 +111,7 @@
     group: nginx
   become: True
 
-- name: Recursirely change ownership of the directory /tmp/awx
+- name: "prepare-server | Recursirely change ownership of the directory /tmp/awx"
   ansible.builtin.file:
     path: "{{ virtualenvroot }}"
     state: directory
@@ -120,7 +120,7 @@
     group: "{{ awx_user }}"
   become: True
 
-- name: Recursirely change ownership of the directory /tmp/awx
+- name: "prepare-server | Recursirely change ownership of the directory /tmp/awx"
   ansible.builtin.file:
     path: "/tmp/{{ project }}"
     state: directory
@@ -129,31 +129,13 @@
     group: "{{ awx_user }}"
   become: True
 
-- name:  create venv
-  ansible.builtin.pip:
-    requirements: "/tmp/{{ project }}/{{ awx_image_version }}/requirements/requirements.txt"
-    virtualenv: "{{ venv }}"
-    virtualenv_command: /usr/bin/python3 -m venv
-  become_user: "{{ awx_user }}"
-  become: True
-
-#- name: create checkplatform script
-#  template:
-#    src: checkplatform.sh.j2
-#    dest: /usr/local/bin/checkplatform.sh
-#    force: yes
-#    mode: '0770'
-#    owner: awx
-#    group: awx
-#  become: True
-
-- name: Enable SELinux in enforcing mode
+- name: "prepare-server | Set SE-Linux in permissive mode"
   ansible.posix.selinux:
     policy: targeted
     state: permissive
   become: True
 
-- name: "adding nginx to group {{ awx_user }}"
+- name: "prepare-server | adding nginx to group {{ awx_user }}"
   user:
     name: nginx
     groups: "{{ awx_user }}"
