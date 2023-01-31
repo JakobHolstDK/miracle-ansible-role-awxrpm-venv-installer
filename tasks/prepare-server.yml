@@ -57,7 +57,7 @@
     group: "{{ awx_user }}"
   become: true 
 
-- name: "prepare-server  | Create log dir"
+- name: "prepare-server | Create log dir"
   file:
     path: /var/log/tower
     owner: "{{ awx_user }}"
