@@ -1,6 +1,6 @@
 FROM centos
 RUN dnf clean all
-RUN dng install -y python3-virtualenv git
+RUN dnf install -y python3-virtualenv git
 RUN python3 -m venv /opt/awx/virtualenv
 RUN /opt/awx/virtualenv/bin/pip install --upgrade pip 
 RUN /opt/awx/virtualenv/bin/pip install --upgrade ansible
