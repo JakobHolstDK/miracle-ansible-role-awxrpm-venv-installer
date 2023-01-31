@@ -2,7 +2,7 @@ FROM ubuntu
 RUN echo hello
 COPY . /opt/install
 RUN apt update
-RUN apt install -y python3-venv
+RUN apt install -y python3-venv git
 RUN python3 -m venv /opt/awx/virtualenv
 RUN /opt/awx/virtualenv/bin/pip install --upgrade pip 
 RUN /opt/awx/virtualenv/bin/pip install --upgrade ansible
