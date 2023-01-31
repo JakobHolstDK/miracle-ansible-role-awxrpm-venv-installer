@@ -1,0 +1,11 @@
+---
+- name: "Demo playbook| ansible installer"
+  hosts: 127.0.0.1
+  connection: local
+  tasks:
+  - name: "Apply role"
+    vars:
+      - var1: "test"
+    include_role:
+      name: awx
+  become: true
