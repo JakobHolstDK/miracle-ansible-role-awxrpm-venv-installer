@@ -1,4 +1,5 @@
 FROM fedora
+COPY . /opt/install
 RUN dnf clean all
 RUN dnf install -y python3-virtualenv git
 RUN python3 -m venv /opt/awx/virtualenv
