@@ -4,15 +4,6 @@
 #  command: "subscription-manager repos --enable 'codeready-builder-for-rhel-8-${ARCH}-rpms'"
 #  become: True
 #  when: ansible_facts['os_family'] == 'RedHat'
-d
-- name: Enable EPEL Repository on CentOS 8
-  dnf:
-    name: epel-release
-    state: latest
-  become: True
-  when: ansible_facts['os_family'] == 'RedHat'
-
-
 - name: "prepare-server | Ensure dependencies are installed."
   dnf:
     pkg: [
