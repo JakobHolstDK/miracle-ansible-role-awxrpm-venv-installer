@@ -129,12 +129,6 @@
     group: "{{ awx_user }}"
   become: True
 
-- name: "prepare-server | Set SE-Linux in permissive mode"
-  ansible.posix.selinux:
-    policy: targeted
-    state: permissive
-  become: True
-
 - name: "prepare-server | adding nginx to group {{ awx_user }}"
   user:
     name: nginx
