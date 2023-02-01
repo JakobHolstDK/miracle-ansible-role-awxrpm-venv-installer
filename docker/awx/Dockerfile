@@ -1,5 +1,4 @@
 FROM fedora
-COPY . /opt/install
 RUN dnf clean all
 RUN dnf install -y python3-virtualenv git jq redis nginx git python3-virtualenv \
     gcc-c++ npm device-mapper-persistent-data lvm2 bzip2 python3-pip ansible gcc openldap-devel xmlsec1-openssl \
