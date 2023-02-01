@@ -13,6 +13,7 @@ RUN dnf install -y         \
 RUN python3 -m venv /opt/awx/virtualenv
 RUN /opt/awx/virtualenv/bin/pip install --upgrade pip 
 RUN /opt/awx/virtualenv/bin/pip install --upgrade ansible
+RUN /opt/awx/virtualenv/bin/pip install --upgrade wheel
 
 RUN useradd -m  awx
 
@@ -32,6 +33,7 @@ RUN /opt/awx/virtualenv/bin/pip install django-rest-swagger
 
 
 WORKDIR /tmp/node
+RUN ./configure
 RUN make -j 8
 
 
