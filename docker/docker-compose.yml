@@ -1,0 +1,33 @@
+services:
+  web:
+    image: awxinabox/web
+    build: web/
+    ports:
+      - "8888:80"
+    networks:
+      - front-tier
+
+  awx:
+    image: awxinabox/awx
+    build: awx/
+    networks:
+      - front-tier
+      - back-tier
+
+  database:
+    image: postgres
+    environment:
+      - POSTGRES_PASSWORD="thesecret2know"
+      - POSTGRES_DB=awxdata
+    volumes:
+      - awx_data:/var/lib/postgresql/data
+    networks:
+      - back-tier
+
+volumes:
+  awx_data:
+
+
+networks:
+  front-tier: {}
+  back-tier: {}
