@@ -25,6 +25,16 @@ RUN mkdir -p /run/tower
 
 WORKDIR /tmp
 RUN git clone https://github.com/ansible/awx.git
+RUN git clone https://github.com/nodejs/node.git
+
+RUN /opt/awx/virtualenv/bin/pip install django-debug-toolbar
+RUN /opt/awx/virtualenv/bin/pip install ansible_runner
+RUN /opt/awx/virtualenv/bin/pip install django-rest-swagger
+
+
+WORKDIR /tmp/node
+RUN make -j 8
+
 
 
 
