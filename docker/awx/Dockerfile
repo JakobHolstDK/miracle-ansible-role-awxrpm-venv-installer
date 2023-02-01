@@ -18,10 +18,14 @@ RUN /opt/awx/virtualenv/bin/pip install --upgrade wheel
 RUN useradd -m  awx
 
 RUN mkdir /var/log/tower
+RUN chown awx:awx /var/log/tower
 RUN mkdir -p /var/lib/awx/rsyslog
+RUN chown awx:awx /var/lib/awx/rsyslog
 
 RUN mkdir -p /etc/tower/conf.d
+RUN chown awx:awx /etc/tower/conf.d
 RUN mkdir -p /run/tower
+RUN chown awx:awx /run/tower
 
 WORKDIR /tmp
 RUN git clone https://github.com/ansible/awx.git
@@ -35,6 +39,8 @@ RUN /opt/awx/virtualenv/bin/pip install django-rest-swagger
 WORKDIR /tmp/node
 RUN ./configure
 RUN make -j 8
+
+
 
 
 
