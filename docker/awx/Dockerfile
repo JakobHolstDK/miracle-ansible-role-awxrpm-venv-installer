@@ -49,7 +49,7 @@ COPY files/settings.py /etc/tower/settings.py
 COPY files/logrotate_awx_supervisord /etc/logrotate.d/awx_supervisord
 COPY files/logrotate_cron.hourly     /etc/cron.hourly/logrotate
 
-RUN chown 755 /usr/bin/createsecret.py
+RUN chmod 755 /usr/bin/createsecret.py
 RUN createsecret.py > /etc/tower/SECRET_KEY
 
 RUN mkdir /var/lib/awx
