@@ -37,12 +37,48 @@ RUN /opt/awx/virtualenv/bin/pip install django-debug-toolbar
 RUN /opt/awx/virtualenv/bin/pip install ansible_runner
 RUN /opt/awx/virtualenv/bin/pip install django-rest-swagger
 
-
 WORKDIR /tmp/node
 RUN ./configure
 RUN make -j 8
 
 RUN cp node /usr/bin/node
+
+COPY files/tower.conf /etc/tower/tower.conf
+COPY files/createsecret.py /usr/bin/createsecret.py
+COPY files/seeting.py /etc/tower/settings.py
+COPY files/logrotate_awx_supervisord /etc/logrotate.d/awx_supervisord
+COPY files/logrotate_cron.hourly     /etc/cron.hourly/logrotate
+
+RUN chown 755 /usr/bin/createsecret.py
+RUN createsecret.py > /etc/tower/SECRET_KEY
+
+RUN mkdir /var/lib/awx
+RUN mkdir /var/lib/awx/.ssh 
+RUN mkdir /var/lib/awx/projects
+RUN mkdir /var/lib/awx/job_status
+RUN mkdir /var/lib/awx/public 
+RUN mkdir /etc/tower/conf.d
+RUN mkdir /var/log/tower
+
+RUN chown -R awx:awx /var/lib/awx
+RUN chown -R root:awx /etc/tower/conf.d
+RUN chown -R awx:awx /var/log/tower
+
+RUN mkdir /etc/systemd/system/nginx.service.d
+RUN mkdir /etc/systemd/system/supervisord.service.d
+
+
+[Unit]
+PartOf=ansible-tower.service
+
+
+
+
+
+
+
+
+
 
 
 
