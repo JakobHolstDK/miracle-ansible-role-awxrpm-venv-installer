@@ -45,7 +45,7 @@ RUN cp node /usr/bin/node
 
 COPY files/tower.conf /etc/tower/tower.conf
 COPY files/createsecret.py /usr/bin/createsecret.py
-COPY files/seetings.py /etc/tower/settings.py
+COPY files/settings.py /etc/tower/settings.py
 COPY files/logrotate_awx_supervisord /etc/logrotate.d/awx_supervisord
 COPY files/logrotate_cron.hourly     /etc/cron.hourly/logrotate
 
