@@ -68,9 +68,6 @@ RUN mkdir /etc/systemd/system/nginx.service.d
 RUN mkdir /etc/systemd/system/supervisord.service.d
 
 
-[Unit]
-PartOf=ansible-tower.service
-
 
 
 
