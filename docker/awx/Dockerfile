@@ -26,6 +26,8 @@ RUN mkdir -p /etc/tower/conf.d
 RUN chown awx:awx /etc/tower/conf.d
 RUN mkdir -p /run/tower
 RUN chown awx:awx /run/tower
+RUN mkdir -p /var/run/tower
+RUN chown awx:awx /var/run/tower
 
 WORKDIR /tmp
 RUN git clone https://github.com/ansible/awx.git
@@ -40,6 +42,7 @@ WORKDIR /tmp/node
 RUN ./configure
 RUN make -j 8
 
+RUN cp node /usr/bin/node
 
 
 
