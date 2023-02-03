@@ -25,6 +25,7 @@ RUN mkdir -p /var/run/tower
 RUN chown awx:awx /var/run/tower
 RUN mkdir /opt/virtualenv
 RUN chown awx:awx /opt/virtualenv
+RUN dnf install -y python3-devel
 
 
 WORKDIR /tmp
@@ -40,7 +41,6 @@ RUN git clone https://github.com/nodejs/node.git
 RUN /opt/virtualenv/bin/pip install django-debug-toolbar
 RUN /opt/virtualenv/bin/pip install ansible_runner
 RUN /opt/virtualenv/bin/pip install django-rest-swagger
-RUN dnf install -y python3-devel
 
 RUN /opt/virtualenv/bin/pip install -r /tmp/awx/requirements/requirements.txt
 
