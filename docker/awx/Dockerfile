@@ -57,7 +57,6 @@ RUN mkdir /var/lib/awx/.ssh
 RUN mkdir /var/lib/awx/projects
 RUN mkdir /var/lib/awx/job_status
 RUN mkdir /var/lib/awx/public 
-RUN mkdir /etc/tower/conf.d
 RUN mkdir /var/log/tower
 
 RUN chown -R awx:awx /var/lib/awx
