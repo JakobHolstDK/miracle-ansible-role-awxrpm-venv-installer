@@ -36,7 +36,7 @@ RUN git clone https://github.com/nodejs/node.git
 RUN /opt/awx/virtualenv/bin/pip install django-debug-toolbar
 RUN /opt/awx/virtualenv/bin/pip install ansible_runner
 RUN /opt/awx/virtualenv/bin/pip install django-rest-swagger
-RUN /opt/awx/virtualenv/bin/pip install django
+RUN /opt/awx/virtualenv/bin/pip install -r /tmp/awx/requirements/requirements.txt
 
 WORKDIR /tmp/node
 RUN ./configure
@@ -69,6 +69,12 @@ RUN chown -R awx:awx /var/log/tower
 
 RUN mkdir -p /etc/systemd/system/nginx.service.d
 RUN mkdir -p /etc/systemd/system/supervisord.service.d
+
+#RUN /opt/awx/virtualenv/bin/awx-manage migrate
+#RUN /opt/awx/virtualenv/bin/awx-manage collectstatic --noinput --clear -v0
+#RUN echo "from django.contrib.auth.models import User; User.objects.create_superuser('admin', 'root@localhost', 'password')" | GIT_PYTHON_REFRESH=quiet /opt/awx/virtualenv/bin/awx-manage shell 
+#RUN /opt/awx/virtualenv/bin/awx-manage provision_instance --hostname=$(hostname)
+#RUN /opt/awx/virtualenv/bin/awx-manage register_queue --queuename=tower --hostnames=$(hostname)
 
 
 
