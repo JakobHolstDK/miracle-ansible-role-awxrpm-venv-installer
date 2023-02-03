@@ -49,8 +49,11 @@ COPY files/createsecret.py /usr/bin/createsecret.py
 COPY files/settings.py /etc/tower/settings.py
 COPY files/logrotate_awx_supervisord /etc/logrotate.d/awx_supervisord
 COPY files/logrotate_cron.hourly     /etc/cron.hourly/logrotate
+COPY files/collect_static_files.sh     /usr/bin/collect_static_files.sh
 
 RUN chmod 755 /usr/bin/createsecret.py
+RUN chmod 755 /usr/bin/collect_static_files.sh
+
 RUN createsecret.py > /etc/tower/SECRET_KEY
 
 RUN mkdir /var/lib/awx/.ssh 
@@ -67,7 +70,6 @@ RUN chown -R awx:awx /var/log/tower
 RUN mkdir -p /etc/systemd/system/nginx.service.d
 RUN mkdir -p /etc/systemd/system/supervisord.service.d
 
-RUN systemctl daemon-reload
 
 
 
