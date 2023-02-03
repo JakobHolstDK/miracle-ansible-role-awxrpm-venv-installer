@@ -10,11 +10,6 @@ RUN dnf install -y         \
       mlocate              \
       libpq-devel 
 
-RUN python3 -m venv /opt/awx/virtualenv
-RUN /opt/awx/virtualenv/bin/pip install --upgrade pip 
-RUN /opt/awx/virtualenv/bin/pip install --upgrade ansible
-RUN /opt/awx/virtualenv/bin/pip install --upgrade wheel
-
 RUN useradd -m  awx
 
 RUN mkdir /var/log/tower
@@ -28,22 +23,32 @@ RUN mkdir -p /run/tower
 RUN chown awx:awx /run/tower
 RUN mkdir -p /var/run/tower
 RUN chown awx:awx /var/run/tower
+RUN mkdir /opt/virtualenv
+RUN chown awx:awx /opt/virtualenv
+
 
 WORKDIR /tmp
+USER awx
+
+RUN python3 -m venv /opt/virtualenv
+RUN /opt/virtualenv/bin/pip install --upgrade pip 
+RUN /opt/virtualenv/bin/pip install --upgrade ansible
+RUN /opt/virtualenv/bin/pip install --upgrade wheel
 RUN git clone https://github.com/ansible/awx.git
 RUN git clone https://github.com/nodejs/node.git
 
-RUN /opt/awx/virtualenv/bin/pip install django-debug-toolbar
-RUN /opt/awx/virtualenv/bin/pip install ansible_runner
-RUN /opt/awx/virtualenv/bin/pip install django-rest-swagger
+RUN /opt/virtualenv/bin/pip install django-debug-toolbar
+RUN /opt/virtualenv/bin/pip install ansible_runner
+RUN /opt/virtualenv/bin/pip install django-rest-swagger
 RUN dnf install -y python3-devel
 
-RUN /opt/awx/virtualenv/bin/pip install -r /tmp/awx/requirements/requirements.txt
+RUN /opt/virtualenv/bin/pip install -r /tmp/awx/requirements/requirements.txt
 
 WORKDIR /tmp/node
 RUN ./configure
 RUN make -j 8
 
+USER root
 RUN cp node /usr/bin/node
 
 COPY files/tower.conf /etc/tower/tower.conf
@@ -71,6 +76,7 @@ RUN chown -R awx:awx /var/log/tower
 
 RUN mkdir -p /etc/systemd/system/nginx.service.d
 RUN mkdir -p /etc/systemd/system/supervisord.service.d
+USER awx
 
 #RUN /opt/awx/virtualenv/bin/awx-manage migrate
 #RUN /opt/awx/virtualenv/bin/awx-manage collectstatic --noinput --clear -v0
