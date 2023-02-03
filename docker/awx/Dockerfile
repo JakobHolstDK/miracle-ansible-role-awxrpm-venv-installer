@@ -57,13 +57,18 @@ RUN mkdir /var/lib/awx/.ssh
 RUN mkdir /var/lib/awx/projects
 RUN mkdir /var/lib/awx/job_status
 RUN mkdir /var/lib/awx/public 
+RUN mkdir /var/run/awx-rsyslog 
 
+RUN chown -R awx:awx /var/run/awx-rsyslog
 RUN chown -R awx:awx /var/lib/awx
 RUN chown -R root:awx /etc/tower/conf.d
 RUN chown -R awx:awx /var/log/tower
 
 RUN mkdir -p /etc/systemd/system/nginx.service.d
 RUN mkdir -p /etc/systemd/system/supervisord.service.d
+
+RUN systemctl daemon-reload
+
 
 
 
