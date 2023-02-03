@@ -62,8 +62,8 @@ RUN chown -R awx:awx /var/lib/awx
 RUN chown -R root:awx /etc/tower/conf.d
 RUN chown -R awx:awx /var/log/tower
 
-RUN mkdir /etc/systemd/system/nginx.service.d
-RUN mkdir /etc/systemd/system/supervisord.service.d
+RUN mkdir -p /etc/systemd/system/nginx.service.d
+RUN mkdir -p /etc/systemd/system/supervisord.service.d
 
 
 
