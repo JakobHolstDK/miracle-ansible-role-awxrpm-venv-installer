@@ -43,7 +43,7 @@ RUN /opt/virtualenv/bin/pip install ansible_runner
 RUN /opt/virtualenv/bin/pip install django-rest-swagger
 RUN /opt/virtualenv/bin/pip install -r /tmp/awx/requirements/requirements.txt
 WORKDIR /tmp/awx
-RUN /opt/virtualenv/bin/pip install awx
+RUN /opt/virtualenv/bin/pip install .
 
 RUN /opt/virtualenv/bin/pip install -r /tmp/awx/requirements/requirements.txt
 
