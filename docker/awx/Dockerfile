@@ -53,7 +53,6 @@ COPY files/logrotate_cron.hourly     /etc/cron.hourly/logrotate
 RUN chmod 755 /usr/bin/createsecret.py
 RUN createsecret.py > /etc/tower/SECRET_KEY
 
-RUN mkdir /var/lib/awx
 RUN mkdir /var/lib/awx/.ssh 
 RUN mkdir /var/lib/awx/projects
 RUN mkdir /var/lib/awx/job_status
