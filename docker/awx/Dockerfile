@@ -36,6 +36,8 @@ RUN git clone https://github.com/nodejs/node.git
 RUN /opt/awx/virtualenv/bin/pip install django-debug-toolbar
 RUN /opt/awx/virtualenv/bin/pip install ansible_runner
 RUN /opt/awx/virtualenv/bin/pip install django-rest-swagger
+RUN dnf install -y python3-devel
+
 RUN /opt/awx/virtualenv/bin/pip install -r /tmp/awx/requirements/requirements.txt
 
 WORKDIR /tmp/node
