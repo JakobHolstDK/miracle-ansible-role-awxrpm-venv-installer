@@ -1,6 +1,5 @@
----
 roles:
-   - src: https://github.com/JakobHolstDK/miracle-ansible-role-awxrpm-venv-installer.git
+   - src: https://github.com/JakobHolstDK/openknowit_ansible_role_awxvenv.git
      scm: git
      version: "master"
-     name: awx
+     name: awxvenv
